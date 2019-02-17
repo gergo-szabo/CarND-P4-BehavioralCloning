@@ -8,14 +8,16 @@ The goals / steps of this project are the following:
 * Build, a convolution neural network in Keras that predicts steering angles from images
 * Train and validate the model with a training and validation set
 * Test that the model successfully drives around both track without leaving the road
-(https://github.com/udacity/CarND-Behavioral-Cloning-P3)
 
 Rubric: [link](https://review.udacity.com/#!/rubrics/432/view)
 
 Helper files: [link](https://github.com/udacity/CarND-Behavioral-Cloning-P3)
+
 Simulator: [link](https://github.com/udacity/self-driving-car-sim)
 
 ---
+## Project description along Rubric points
+
 ### Files Submitted & Code Quality
 
 #### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
@@ -23,14 +25,14 @@ Simulator: [link](https://github.com/udacity/self-driving-car-sim)
 My project includes the following files:
 * model.py containing the script to create and train the model
 * model.h5 containing a trained convolution neural network 
-* run1.mp4 showing the agent on track one
-* run2.mp4 showing the agent on track two
-* writeup_report.md summarizing the results
+* [run1.mp4](run1.mp4) showing the agent on track one
+* [run2.mp4](run2.mp4) showing the agent on track two
+* README.md summarizing the results
 * drive.py for driving the car in autonomous mode (see helper files, unchanged)
 * video.py for creating video from images (see helper files, unchanged)
 
 #### 2. Submission includes functional code
-Using the drive.py file an the Udacity provided simulator's autonomus mode, the agent will drive the car around the tracks autonomously. Execute: 
+Using the drive.py file an the Udacity provided simulator's autonomous mode, the agent will drive the car around the tracks autonomously. Execute: 
 ```sh
 python drive.py model.h5 run1
 ```
@@ -51,24 +53,24 @@ My model consists of a convolution neural network which is based on a network ar
 
 Training data consists of 160x320 RGB pictures and steering angles.
 
-1,  The data is normalized by Keras lamda layer.
-2,  The top and bottom of the recorded images are cropped. (70/25 pixel)
-3,  2D convolution: depth: 24, 5x5 kernel, 2x2 stride along pixels and RELU activation
-4,  2D convolution: depth: 36, 5x5 kernel, 2x2 stride along pixels and RELU activation
-5,  2D convolution: depth: 48, 5x5 kernel, 2x2 stride along pixels and RELU activation
-6,  2D convolution: depth: 64, 3x3 kernel and RELU activation
-7,  Droput: 0.5 (additon to original architecture)
-8,  2D convolution: depth: 64, 3x3 kernel and RELU activation
-9,  Droput: 0.5 (additon to original architecture)
-10, Flatten (Dense)
-11, Droput: 0.5 (additon to original architecture)
-12, Dense: 100
-13, Dense: 50
-14, Dense: 1 (deviation to original architecture due to different output requirement)
+1. The data is normalized by Keras lamda layer.
+2. The top and bottom of the recorded images are cropped. (70/25 pixel)
+3. 2D convolution: depth: 24, 5x5 kernel, 2x2 stride along pixels and RELU activation
+4. 2D convolution: depth: 36, 5x5 kernel, 2x2 stride along pixels and RELU activation
+5. 2D convolution: depth: 48, 5x5 kernel, 2x2 stride along pixels and RELU activation
+6. 2D convolution: depth: 64, 3x3 kernel and RELU activation
+7. Droput: 0.5 (addition to original architecture)
+8. 2D convolution: depth: 64, 3x3 kernel and RELU activation
+9. Droput: 0.5 (addition to original architecture)
+10. Flatten (Dense)
+11. Droput: 0.5 (addition to original architecture)
+12. Dense: 100
+13. Dense: 50
+14. Dense: 1 (deviation to original architecture due to different output requirement)
 
 #### 2. Attempts to reduce overfitting in the model
 
-Introducing dropout seems to be unneccesery for the first few layer because the simulation has relatively low amount of variation in textures, features, etc.
+Introducing dropout seems to be unnecessary for the first few layer because the simulation has relatively low amount of variation in textures, features, etc.
 
 The model contains dropout layers in it's middle section in order to reduce overfitting.
 
@@ -83,12 +85,14 @@ The model used an adam optimizer, so the learning rate was not tuned manually.
 #### 4. Appropriate training data
 
 My training data consist of four recording of simulated driving:
-1, 2 lap on first track. Center lane driving.
-2, 1 run on first half of second track. Center lane driving.
-3, 1 run on first half of second track. Driving close to inner curve of bends. Otherwise center lane driving.
-4, 1 run on the first big curve of the second track. Driving in consciously unusual arcs. (Recovery action.)
+1. 2 lap on first track. Center lane driving.
+2. 1 run on first half of second track. Center lane driving.
+3. 1 run on first half of second track. Driving close to inner curve of bends. Otherwise center lane driving.
+4. 1 run on the first big curve of the second track. Driving in consciously unusual arcs. (Recovery action.)
 
-![Begining of the 2nd half of track two][testset]
+For testing purposes the 2nd half of the second track was not included in the training data. Beginning of this section is next to the starting point on the parallel road:
+
+![Beginning of the 2nd half of track two](testset.jpg)
 
 For details about how I processed the training data, see the next sections. 
 
@@ -96,7 +100,7 @@ For details about how I processed the training data, see the next sections.
 
 #### 1. Solution Design Approach
 
-My first goal was to create an agent which can drive around the first track. I decided to use the already mentioned Nvidia's architecture for autonomus driving with (unaugmented) training data from one lap of center lane driving. The result was very promising.
+My first goal was to create an agent which can drive around the first track. I decided to use the already mentioned Nvidia's architecture for autonomous driving with (unaugmented) training data from one lap of center lane driving. The result was very promising.
 
 I collected more data from track two, started to use the left and right camera images and also mirrored every image (and steering angle).
 
@@ -119,4 +123,4 @@ The training data is randomly shuffled before training and 20% of the data is us
 
 I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
-Generator was not used because it was not neccesery. (i5-3320M 2x2600 MHz, 16 GB RAM)
+Generator was not used because it was not necessary. (i5-3320M 2x2600 MHz, 16 GB RAM)
