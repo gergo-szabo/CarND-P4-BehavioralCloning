@@ -123,4 +123,4 @@ The training data is randomly shuffled before training and 20% of the data is us
 
 I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
-Generator was not used because it was not necessary. (i5-3320M 2x2600 MHz, 16 GB RAM)
+To train the NN generator was not necessary. (i5-3320M 2x2600 MHz, 16 GB RAM)
